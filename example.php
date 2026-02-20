@@ -38,7 +38,7 @@ echo "    <meta charset='UTF-8'>\n";
 echo "    <title>بات خوش‌آمدگویی</title>\n";
 echo "</head>\n";
 echo "<body>\n";
-echo "    <h1>" . $bot->getRandomWelcome() . "</h1>\n";
+echo "    <h1>" . htmlspecialchars($bot->getRandomWelcome(), ENT_QUOTES, 'UTF-8') . "</h1>\n";
 echo "</body>\n";
 echo "</html>\n";
 ?>

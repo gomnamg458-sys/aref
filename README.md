@@ -10,6 +10,7 @@ A simple welcome bot in PHP with Persian (Farsi) language support
 - 👤 خوش‌آمدگویی شخصی‌سازی شده با نام کاربر
 - 🔧 قابلیت افزودن پیام‌های سفارشی
 - 📱 قابل استفاده در CLI و محیط وب
+- 🔒 حفاظت در برابر حملات XSS با escape کردن خودکار HTML
 - 🎯 کد ساده و قابل توسعه
 
 ## نصب و استفاده - Installation & Usage
@@ -65,13 +66,15 @@ Returns a random welcome message
 $message = $bot->getRandomWelcome();
 ```
 
-#### `greetUser($name)`
+#### `greetUser($name, $escapeHtml = true)`
 خوش‌آمدگویی به کاربر با نام مشخص
 
-Greet a specific user by name
+Greet a specific user by name (with automatic HTML escaping for security)
 
 ```php
 $greeting = $bot->greetUser('محمد');
+// برای محیط‌های غیر وب می‌توانید escaping را غیرفعال کنید
+$greeting = $bot->greetUser('محمد', false);
 ```
 
 #### `getAllMessages()`
@@ -83,13 +86,15 @@ Get all available welcome messages
 $messages = $bot->getAllMessages();
 ```
 
-#### `addMessage($message)`
+#### `addMessage($message, $escapeHtml = true)`
 افزودن پیام سفارشی جدید
 
-Add a custom welcome message
+Add a custom welcome message (with automatic HTML escaping for security)
 
 ```php
 $bot->addMessage('پیام جدید شما');
+// برای محیط‌های غیر وب می‌توانید escaping را غیرفعال کنید
+$bot->addMessage('پیام جدید شما', false);
 ```
 
 ## مثال‌ها - Examples
@@ -125,6 +130,20 @@ foreach (['علی', 'فاطمه', 'حسین'] as $user) {
 }
 ?>
 ```
+
+## امنیت - Security
+
+این بات دارای ویژگی‌های امنیتی زیر است:
+
+- **حفاظت از XSS**: تمام ورودی‌های کاربر به صورت خودکار escape می‌شوند
+- **Escape پیش‌فرض**: متدهای `greetUser()` و `addMessage()` به صورت پیش‌فرض HTML را escape می‌کنند
+- **کنترل دستی**: در صورت نیاز می‌توانید با پارامتر `escapeHtml = false` این قابلیت را غیرفعال کنید
+
+This bot includes the following security features:
+
+- **XSS Protection**: All user inputs are automatically escaped
+- **Default Escaping**: Methods `greetUser()` and `addMessage()` escape HTML by default
+- **Manual Control**: You can disable escaping with `escapeHtml = false` parameter if needed
 
 ## مشارکت - Contributing
 

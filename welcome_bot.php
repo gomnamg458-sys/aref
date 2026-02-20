@@ -29,10 +29,12 @@ class WelcomeBot {
     /**
      * Greet a user by name
      * @param string $name User's name
+     * @param bool $escapeHtml Whether to escape HTML entities (default: true for web safety)
      * @return string
      */
-    public function greetUser($name) {
-        return "سلام {$name}! خوش آمدید! 🎊";
+    public function greetUser($name, $escapeHtml = true) {
+        $safeName = $escapeHtml ? htmlspecialchars($name, ENT_QUOTES, 'UTF-8') : $name;
+        return "سلام {$safeName}! خوش آمدید! 🎊";
     }
     
     /**
@@ -46,9 +48,11 @@ class WelcomeBot {
     /**
      * Add a custom welcome message
      * @param string $message
+     * @param bool $escapeHtml Whether to escape HTML entities (default: true for web safety)
      */
-    public function addMessage($message) {
-        $this->messages[] = $message;
+    public function addMessage($message, $escapeHtml = true) {
+        $safeMessage = $escapeHtml ? htmlspecialchars($message, ENT_QUOTES, 'UTF-8') : $message;
+        $this->messages[] = $safeMessage;
     }
 }
 

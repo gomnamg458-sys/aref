@@ -53,6 +53,12 @@ $bot->addMessage('پیام سفارشی شما');
 php example.php
 ```
 
+#### 4. اجرای تست‌ها - Run Tests
+
+```bash
+php test.php
+```
+
 ## API Documentation
 
 ### متدها - Methods
